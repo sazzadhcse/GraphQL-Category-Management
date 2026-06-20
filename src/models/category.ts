@@ -1,8 +1,8 @@
 import { Schema, model, Types } from "mongoose";
 
 export interface ICategory{
-    name: String;
-    nameNormalized: String;
+    name: string;
+    nameNormalized: string;
     parent: Types.ObjectId | null;
     ancestors: Types.ObjectId[];
     isActive: boolean;

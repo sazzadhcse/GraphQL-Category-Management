@@ -4,6 +4,7 @@ export const typeDefs = gql`
     type Category {
         id: ID!
         name: String!
+        path: String!
         isActive: Boolean!
         parent: Category
         ancestors: [Category!]!

@@ -1,11 +1,21 @@
 import { categoryService } from "../services/category";
 
 export const resolvers = {
+    Category: {
+        id: (category: any) => {
+            return category._id.toString();
+        },
+        
+        path: (category: any) => {
+            const ancestorNames = category.ancestors?.map((item: any) => item.name) || [];
+            return [...ancestorNames, category.name].join(' > ');
+        },
+    },
     Query:{
         getCategories: async () => {
             return await categoryService.getCategories();
         },
-
+        
         getCategory: async (_: any, { id }: { id: string }) => {
             return await categoryService.getCategory(id);
         },
@@ -14,7 +24,7 @@ export const resolvers = {
             return await categoryService.searchCategory(name);
         },
     },
-
+    
     Mutation:{
         createCategory: async (_: any,args: { name: string; parentId?: string },
         ) => {
